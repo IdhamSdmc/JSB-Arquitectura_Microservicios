@@ -4,7 +4,7 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://209.145.60.40:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
 
 spring:
   cloud:
@@ -22,10 +22,10 @@ spring:
           enabled: true
       routes:
         - id: persona-service
-          uri: https://6e46-190-233-177-6.ngrok.io/
+          uri: http://localhost:8081/
           predicates:
             - Path=/persona/**
         - id: solicitud-service
-          uri: https://b9f5-190-233-177-6.ngrok.io/
+          uri: https://localhost:8081/
           predicates:
             - Path=/solicitud/**
