@@ -1,5 +1,19 @@
+# Server configuration
+server:
+  port: 8091
+  error:
+    include-message: always
+    include-binding-errors: always
+eureka:
+  client:
+    serviceUrl:
+      # defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_URI:http://registry-service:8761/eureka}
+
 # Spring Boot configuration
 spring:
+  application:
+    name: persona-service   #current service name to be used by the eureka server
   profiles:
     active: development
   # Security configuration
@@ -18,7 +32,7 @@ spring:
     hibernate:
       ddl-auto: update # When you launch the application for the first time - switch "none" at "create"
     show-sql: true
-    database: postgresql
+    database: POSTGRESQL
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
     generate-ddl: true
@@ -29,13 +43,3 @@ logging:
   level:
     org.springframework: info
     org.hibernate: debug
-# Server configuration
-server:
-  port: 8091
-  error:
-    include-message: always
-    include-binding-errors: always
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/

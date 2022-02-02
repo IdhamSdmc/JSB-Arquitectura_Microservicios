@@ -1,10 +1,11 @@
 server:
   port: 8099
 
-eureka:
+eureka: #tells about the Eureka server details and its refresh time
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      # defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_URI:http://registry-service:8761/eureka} # Registers the Gateway in Eureka Server
 
 spring:
   cloud:
@@ -19,13 +20,18 @@ spring:
               allowedHeaders: "*"
       discovery:
         locator:
-          enabled: true
+          enabled: true #Enable de locator for the services in Eureka Server (Registry Discovery)
       routes:
         - id: persona-service
-          uri: http://localhost:8091/
+          uri: lb://persona-service #Persona service route declaration
           predicates:
-            - Path=/persona/**
+            - Path=/persona/** #Path to access the service
+          filters:
+            - StripPrefix=1
+
         - id: solicitud-service
-          uri: https://localhost:8092/
+          uri: lb://solicitud-service #Solicitud service route declaration
           predicates:
-            - Path=/solicitud/**
+            - Path=/solicitud/** #Path to access the service
+          filters:
+            - StripPrefix=1
