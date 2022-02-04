@@ -1,0 +1,72 @@
+COMMAND-GENERAL
+
+Build an image >>>
+docker build -t image-name .
+
+Run and Image on a container >>>
+docker run --name name-container -p PORT:PORT image-name
+
+Add Tag to an image >>>
+docker tag image user/config-server-repo:tagename
+
+Push or upload an image to a repository >>>
+docker push user/name-repo:tagname
+
+LOGIN TO DOCKER HUB
+docker login -u user
+
+COMMANDS TO THIS APPLICATION
+========Config-Service
+Build an image >>>
+docker build -t im-config-service .
+
+Add Tag to an image >>>
+docker tag im-config-service sam878adom/config-server-repo:litecs-v1
+
+Push or upload an image to a repository >>>
+docker push sam878adom/config-server-repo:litecs-v1
+
+========Registry-Service
+Build an image >>>
+docker build -t im-registry-service .
+
+Add Tag to an image >>>
+docker tag im-registry-service sam878adom/registry-server-repo:liters-v1
+
+Push or upload an image to a repository >>>
+docker push sam878adom/registry-server-repo:liters-v1
+
+========Gateway-Service
+Build an image >>>
+docker build -t im-gateway-service .
+
+Add Tag to an image >>>
+docker tag im-gateway-service sam878adom/gateway-server-repo:litegs-v1
+
+Push or upload an image to a repository >>>
+docker push sam878adom/gateway-server-repo:litegs-v1
+
+========MS-Persona
+Build an image >>>
+docker build -t im-persona-service .
+
+Add Tag to an image >>>
+docker tag im-persona-service sam878adom/persona-server-repo:liteps-v1
+
+Push or upload an image to a repository >>>
+docker push sam878adom/persona-server-repo:liteps-v1
+
+========MS-Solicitud
+Build an image >>>
+docker build -t im-solicitud-service .
+
+Add Tag to an image >>>
+docker tag im-solicitud-service sam878adom/solicitud-server-repo:litess-v1
+
+Push or upload an image to a repository >>>
+docker push sam878adom/solicitud-server-repo:litess-v1
+
+
+
+
+
