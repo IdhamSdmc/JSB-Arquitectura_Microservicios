@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: persona-service
+  cloud:
+    config:
+      #Ruta donde corre el config-service
+      uri: http://config-service:8081
+      username: root
+      password: s3cr3t
+      retry:
+        max-attempts: 10
+        initial-interval: 5000
+      fail-fast: true
+ngrok:
+  enabled: true
+eureka:
+  hostname: persona-service
+  instance:
+    status-page-url: http://persona-service:8091/persona/listar
