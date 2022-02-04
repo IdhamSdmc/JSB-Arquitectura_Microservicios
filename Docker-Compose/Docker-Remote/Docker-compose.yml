@@ -1,0 +1,81 @@
+version: '3.3'
+services:
+
+#CONFIG - SERVER
+  config-service:
+    image: sam878adom/config-server-repo:litecs-v1
+    container_name: config-service
+    ports:
+      - "8081:8081"
+    expose:
+      - 8081
+
+#EUREKA SERVER - DISCOVERY SERVER
+  registry-service:
+    image: sam878adom/registry--server-repo:liters-v1
+    container_name: registry-service
+    ports:
+      - "8761:8761"
+    expose:
+      - 8761
+    depends_on:
+      - config-service
+    links:
+      - config-service
+    environment:
+      SPRING_CLOUD_CONFIG_URI: http://config-service:8081
+      EUREKA_URI: http://registry-service:8761/eureka
+
+#MICROSERVICIO GATEWAY
+  gateway-service:
+    image: sam878adom/gateway-server-repo:litegs-v1
+    container_name: gateway-service
+    ports:
+      - "8099:8099"
+    expose:
+      - 8099
+    depends_on:
+      - config-service
+      - registry-service
+    links:
+      - config-service
+      - registry-service
+    environment:
+      SPRING_CLOUD_CONFIG_URI: http://config-service:8081
+      EUREKA_URI: http://registry-service:8761/eureka
+
+#MICROSERVICIO PERSONA
+  persona-service:
+    image: sam878adom/persona-server-repo:liteps-v1
+    container_name: persona-service
+    ports:
+      - "8091:8091"
+    expose:
+      - 8091
+    depends_on:
+      - config-service
+      - registry-service
+    links:
+      - config-service
+      - registry-service
+    environment:
+      SPRING_CLOUD_CONFIG_URI: http://config-service:8081
+      EUREKA_URI: http://registry-service:8761/eureka
+
+#MICROSERVICIO SOLICITUD
+  solicitud-service:
+    image: sam878adom/solicitud-server-repo:litess-v1
+    container_name: solicitud-service
+    ports:
+      - "8092:8092"
+    expose:
+      - 8092
+    depends_on:
+      - config-service
+      - registry-service
+    links:
+      - config-service
+      - registry-service
+    environment:
+      SPRING_CLOUD_CONFIG_URI: http://config-service:8081
+      EUREKA_URI: http://registry-service:8761/eureka
