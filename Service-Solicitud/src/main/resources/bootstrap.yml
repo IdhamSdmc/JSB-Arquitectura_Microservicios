@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: solicitud-service
+  cloud:
+    config:
+      uri: http://config-service:8081
+      username: root
+      password: s3cr3t
+      retry:
+        max-attempts: 10
+        initial-interval: 5000
+      fail-fast: true
+
+ngrok:
+  enabled: true
+
+eureka:
+  hostname: solicitud-service
+  instance:
+    status-page-url: http://solicitud-service:8092/solicitud/listar
+
